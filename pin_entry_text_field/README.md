@@ -7,9 +7,9 @@ The source code is **100% Dart**, and everything resides in the [/lib](https://g
 
 ### Show some :heart: and star the repo to support the project
 
-### Screen shots
-![screenshot_1](https://user-images.githubusercontent.com/15202781/45807904-650ca080-bcbc-11e8-87de-2b9c76b3a05f.jpg)
-![screenshot_2](https://user-images.githubusercontent.com/15202781/45807939-79e93400-bcbc-11e8-8bef-808c5459d6dd.jpg)
+### GIF
+<img src="https://user-images.githubusercontent.com/15202781/45807904-650ca080-bcbc-11e8-87de-2b9c76b3a05f.jpg" height="400" width="400"/>
+<img src="https://user-images.githubusercontent.com/15202781/45807939-79e93400-bcbc-11e8-8bef-808c5459d6dd.jpg" height="400" width="400"/>
 
 ## 💻 Installation
 In the `dependencies:` section of your `pubspec.yaml`, add the following line:
