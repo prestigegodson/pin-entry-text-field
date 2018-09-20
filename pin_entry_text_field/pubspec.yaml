@@ -2,7 +2,7 @@ name: pin_entry_text_field
 description: Customized Pin Entry TextField for flutter
 version: 0.0.1
 author: Godson Ositadinma <prestigegodson@gmail.com>
-homepage:
+homepage: https://github.com/prestigegodson/pin-entry-text-field
 
 dependencies:
   flutter:
