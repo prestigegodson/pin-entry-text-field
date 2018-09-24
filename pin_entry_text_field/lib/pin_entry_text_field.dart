@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 class PinEntryTextField extends StatefulWidget{
 
-  int fields;
-  var onSubmit;
-  double fieldWidth;
-  double fontSize;
-  bool isTextObscure;
-  bool showFieldAsBox;
+  final int fields;
+  final onSubmit;
+  final fieldWidth;
+  final fontSize;
+  final isTextObscure;
+  final showFieldAsBox;
 
   PinEntryTextField({this.fields : 4, this.onSubmit, this.fieldWidth : 40.0,
     this.fontSize : 20.0, this.isTextObscure: false, this.showFieldAsBox : false}) : assert(fields > 0);
@@ -40,11 +40,13 @@ class PinEntryTextFieldState extends State<PinEntryTextField>{
   void dispose() {
     _focusNodes.forEach( (FocusNode f) => f.dispose());
     _textControllers.forEach((TextEditingController t) => t.dispose());
+    super.dispose();
   }
 
   void clearTextFields(){
 
     _textControllers.forEach((TextEditingController tEditController) => tEditController.clear());
+    _pin.clear();
   }
 
   Widget buildTextField(int i, BuildContext context){

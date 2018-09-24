@@ -2,3 +2,9 @@
 
 * Initial Open Source release.
 
+## [0.1.1]
+* updated the package description
+* changed the class instance variables to final
+* cleared pin variable value after submitting and on textField widget focus
+* added super call on dispose method
+

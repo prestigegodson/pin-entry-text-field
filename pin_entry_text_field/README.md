@@ -17,7 +17,7 @@ In the `dependencies:` section of your `pubspec.yaml`, add the following line:
 ```
 pin_entry_text_field: <latest_version>
 ```
-`Current Version : ^0.0.1`
+`Current Version : ^0.1.1`
 
 ## ❔ Usage
 
