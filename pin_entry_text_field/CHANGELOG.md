@@ -8,3 +8,7 @@
 * cleared pin variable value after submitting and on textField widget focus
 * added super call on dispose method
 
+## [0.1.2]
+* formatted the source code
+* reduced the description length to 131 characters
+
