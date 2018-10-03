@@ -12,3 +12,6 @@
 * formatted the source code
 * reduced the description length to 131 characters
 
+## [0.1.3]
+* Removed focusNode.dispose() on widget dispose
+
