@@ -8,20 +8,17 @@ class PinEntryTextField extends StatefulWidget {
   final fieldWidth;
   final fontSize;
   final isTextObscure;
-  final showFieldAsBox;
   final inputStyle;
+  final inputDecoration;
 
   PinEntryTextField(
       {this.fields: 4,
-      this.onSubmit,
-      this.fieldWidth: 40.0,
-      this.fontSize: 20.0,
-      this.isTextObscure: false,
-      this.showFieldAsBox: false,
-      this.inputStyle: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-            fontSize: widget.fontSize),
+        this.onSubmit,
+        this.fieldWidth: 40.0,
+        this.fontSize: 20.0,
+        this.isTextObscure: false,
+        this.inputStyle,
+        this.inputDecoration,
       })
       : assert(fields > 0);
 
@@ -53,7 +50,7 @@ class PinEntryTextFieldState extends State<PinEntryTextField> {
 
   void clearTextFields() {
     _textControllers.forEach(
-        (TextEditingController tEditController) => tEditController.clear());
+            (TextEditingController tEditController) => tEditController.clear());
     _pin.clear();
   }
 
@@ -75,27 +72,23 @@ class PinEntryTextFieldState extends State<PinEntryTextField> {
         keyboardType: TextInputType.number,
         textAlign: TextAlign.center,
         maxLength: 1,
-        style: inputStyle,
+        style: widget.inputStyle,
+        decoration: widget.inputDecoration,
         focusNode: _focusNodes[i],
         obscureText: widget.isTextObscure,
-        decoration: InputDecoration(
-            counterText: "",
-            border: widget.showFieldAsBox
-                ? OutlineInputBorder(borderSide: BorderSide(width: 2.0))
-                : null),
         onChanged: (String str) {
           _pin[i] = str;
           if (i + 1 != widget.fields) {
             FocusScope.of(context).requestFocus(_focusNodes[i + 1]);
           } else {
-            clearTextFields();
             FocusScope.of(context).requestFocus(_focusNodes[0]);
             widget.onSubmit(_pin.join());
+            clearTextFields();
           }
         },
         onSubmitted: (String str) {
-          clearTextFields();
           widget.onSubmit(_pin.join());
+          clearTextFields();
         },
       ),
     );
