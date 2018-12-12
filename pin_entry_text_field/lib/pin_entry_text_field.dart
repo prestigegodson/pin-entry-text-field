@@ -9,6 +9,7 @@ class PinEntryTextField extends StatefulWidget {
   final fontSize;
   final isTextObscure;
   final showFieldAsBox;
+  final inputStyle;
 
   PinEntryTextField(
       {this.fields: 4,
@@ -16,7 +17,12 @@ class PinEntryTextField extends StatefulWidget {
       this.fieldWidth: 40.0,
       this.fontSize: 20.0,
       this.isTextObscure: false,
-      this.showFieldAsBox: false})
+      this.showFieldAsBox: false,
+      this.inputStyle: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+            fontSize: widget.fontSize),
+      })
       : assert(fields > 0);
 
   @override
@@ -69,10 +75,7 @@ class PinEntryTextFieldState extends State<PinEntryTextField> {
         keyboardType: TextInputType.number,
         textAlign: TextAlign.center,
         maxLength: 1,
-        style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-            fontSize: widget.fontSize),
+        style: inputStyle,
         focusNode: _focusNodes[i],
         obscureText: widget.isTextObscure,
         decoration: InputDecoration(
