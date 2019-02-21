@@ -10,17 +10,21 @@ class PinEntryTextField extends StatefulWidget {
   final isTextObscure;
   final inputStyle;
   final inputDecoration;
+  final autoClearOnSubmit;
 
-  PinEntryTextField(
-      {this.fields: 4,
-        this.onSubmit,
-        this.fieldWidth: 40.0,
-        this.fontSize: 20.0,
-        this.isTextObscure: false,
-        this.inputStyle,
-        this.inputDecoration,
-      })
-      : assert(fields > 0);
+  PinEntryTextField({
+    Key key,
+    this.fields: 4,
+    this.onSubmit,
+    this.fieldWidth: 40.0,
+    this.fontSize: 20.0,
+    this.isTextObscure: false,
+    this.inputStyle,
+    this.inputDecoration,
+    this.autoClearOnSubmit = true,
+  })
+      : assert(fields > 0),
+        super(key: key);
 
   @override
   State createState() {
@@ -49,6 +53,7 @@ class PinEntryTextFieldState extends State<PinEntryTextField> {
   }
 
   void clearTextFields() {
+    FocusScope.of(context).requestFocus(_focusNodes[0]);
     _textControllers.forEach(
             (TextEditingController tEditController) => tEditController.clear());
     _pin.clear();
@@ -81,14 +86,11 @@ class PinEntryTextFieldState extends State<PinEntryTextField> {
           if (i + 1 != widget.fields) {
             FocusScope.of(context).requestFocus(_focusNodes[i + 1]);
           } else {
-            FocusScope.of(context).requestFocus(_focusNodes[0]);
             widget.onSubmit(_pin.join());
-            clearTextFields();
+            if (widget.autoClearOnSubmit) {
+              clearTextFields();
+            }
           }
-        },
-        onSubmitted: (String str) {
-          widget.onSubmit(_pin.join());
-          clearTextFields();
         },
       ),
     );
