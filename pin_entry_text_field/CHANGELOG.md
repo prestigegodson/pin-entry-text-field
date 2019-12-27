@@ -15,3 +15,6 @@
 ## [0.1.3]
 * Removed focusNode.dispose() on widget dispose
 
+## [0.1.4]
+* fixed submit on last digit entry
+
