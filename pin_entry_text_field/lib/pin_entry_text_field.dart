@@ -6,11 +6,11 @@ import 'package:flutter/services.dart';
 class PinEntryTextField extends StatefulWidget {
   final String lastPin;
   final int fields;
-  final onSubmit;
-  final fieldWidth;
-  final fontSize;
-  final isTextObscure;
-  final showFieldAsBox;
+  final ValueChanged<String> onSubmit;
+  final num fieldWidth;
+  final num fontSize;
+  final bool isTextObscure;
+  final bool showFieldAsBox;
 
   PinEntryTextField(
       {this.lastPin,
@@ -61,7 +61,7 @@ class PinEntryTextFieldState extends State<PinEntryTextField> {
 
   Widget generateTextFields(BuildContext context) {
     List<Widget> textFields = List.generate(widget.fields, (int i) {
-      return buildTextField(i, context);
+      return buildTextField(i, context, i == 0);
     });
 
     if (_pin.first != null) {
@@ -80,13 +80,13 @@ class PinEntryTextFieldState extends State<PinEntryTextField> {
     _pin.clear();
   }
 
-  Widget buildTextField(int i, BuildContext context) {
+  Widget buildTextField(int i, BuildContext context, [bool autofocus = false]) {
     if (_focusNodes[i] == null) {
       _focusNodes[i] = FocusNode();
     }
     if (_textControllers[i] == null) {
       _textControllers[i] = TextEditingController();
-      if (widget.lastPin != null ) {
+      if (widget.lastPin != null) {
         _textControllers[i].text = widget.lastPin[i];
       }
     }
@@ -105,9 +105,10 @@ class PinEntryTextFieldState extends State<PinEntryTextField> {
         keyboardType: TextInputType.number,
         textAlign: TextAlign.center,
         maxLength: 1,
+        autofocus: autofocus,
         style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.black,
+            // color: Colors.black,
             fontSize: widget.fontSize),
         focusNode: _focusNodes[i],
         obscureText: widget.isTextObscure,
@@ -151,4 +152,3 @@ class PinEntryTextFieldState extends State<PinEntryTextField> {
     return textfields;
   }
 }
-
