@@ -11,6 +11,7 @@ class PinEntryTextField extends StatefulWidget {
   final num fontSize;
   final bool isTextObscure;
   final bool showFieldAsBox;
+  final Color borderColor;
 
   PinEntryTextField(
       {this.lastPin,
@@ -19,7 +20,8 @@ class PinEntryTextField extends StatefulWidget {
       this.fieldWidth: 40.0,
       this.fontSize: 20.0,
       this.isTextObscure: false,
-      this.showFieldAsBox: false})
+      this.showFieldAsBox: false,
+      this.borderColor: Colors.black})
       : assert(fields > 0);
 
   @override
@@ -115,7 +117,7 @@ class PinEntryTextFieldState extends State<PinEntryTextField> {
         decoration: InputDecoration(
             counterText: "",
             border: widget.showFieldAsBox
-                ? OutlineInputBorder(borderSide: BorderSide(width: 2.0))
+                ? OutlineInputBorder(borderSide: BorderSide(width: 2.0, color: widget.borderColor))
                 : null),
         onChanged: (String str) {
           setState(() {
