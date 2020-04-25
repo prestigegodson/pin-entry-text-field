@@ -12,6 +12,8 @@ class PinEntryTextField extends StatefulWidget {
   final bool isTextObscure;
   final bool showFieldAsBox;
   final Color borderColor;
+  final Color focusedBorderColor;
+  final Color textColor;
 
   PinEntryTextField(
       {this.lastPin,
@@ -21,7 +23,9 @@ class PinEntryTextField extends StatefulWidget {
       this.fontSize: 20.0,
       this.isTextObscure: false,
       this.showFieldAsBox: false,
-      this.borderColor: Colors.black})
+      this.borderColor: Colors.black,
+      this.focusedBorderColor,
+      this.textColor: Colors.black})
       : assert(fields > 0);
 
   @override
@@ -110,7 +114,7 @@ class PinEntryTextFieldState extends State<PinEntryTextField> {
         autofocus: autofocus,
         style: TextStyle(
             fontWeight: FontWeight.bold,
-            // color: Colors.black,
+            color: widget.textColor,
             fontSize: widget.fontSize),
         focusNode: _focusNodes[i],
         obscureText: widget.isTextObscure,
@@ -118,7 +122,14 @@ class PinEntryTextFieldState extends State<PinEntryTextField> {
             counterText: "",
             border: widget.showFieldAsBox
                 ? OutlineInputBorder(borderSide: BorderSide(width: 2.0, color: widget.borderColor))
-                : null),
+                : UnderlineInputBorder(borderSide: BorderSide(width: 2.0, color: widget.borderColor)),
+            enabledBorder: widget.showFieldAsBox
+              ? OutlineInputBorder(borderSide: BorderSide(width: 2.0, color: widget.borderColor))
+              : UnderlineInputBorder(borderSide: BorderSide(width: 2.0, color: widget.borderColor)),
+            focusedBorder: widget.showFieldAsBox
+              ? OutlineInputBorder(borderSide: BorderSide(width: 2.0, color: 
+                (widget.focusedBorderColor == null) ? Theme.of(context).primaryColor : widget.focusedBorderColor))
+              : UnderlineInputBorder(borderSide: BorderSide(width: 2.0, color: widget.borderColor))),
         onChanged: (String str) {
           setState(() {
             _pin[i] = str;
