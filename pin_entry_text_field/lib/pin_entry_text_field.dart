@@ -11,15 +11,23 @@ class PinEntryTextField extends StatefulWidget {
   final num fontSize;
   final bool isTextObscure;
   final bool showFieldAsBox;
+  final cursorColor;  // Leaving the data type dynamic for adding Color or Material Color
+  final boxColor;
+  final textColor;
 
   PinEntryTextField(
       {this.lastPin,
-      this.fields: 4,
-      this.onSubmit,
-      this.fieldWidth: 40.0,
-      this.fontSize: 20.0,
-      this.isTextObscure: false,
-      this.showFieldAsBox: false})
+        this.fields: 4,
+        this.onSubmit,
+        this.fieldWidth: 40.0,
+        this.fontSize: 20.0,
+        this.isTextObscure: false,
+        this.showFieldAsBox: false,
+        this.cursorColor: Colors.blue,  // Adding a Material Color so that if the user want black, it get accepted too
+        this.boxColor: Colors.blue,
+        this.textColor: Colors.blue,
+
+      })
       : assert(fields > 0);
 
   @override
@@ -33,7 +41,7 @@ class PinEntryTextFieldState extends State<PinEntryTextField> {
   List<FocusNode> _focusNodes;
   List<TextEditingController> _textControllers;
 
-  Widget textfields = Container();
+  Widget textFields = Container();
 
   @override
   void initState() {
@@ -48,7 +56,7 @@ class PinEntryTextFieldState extends State<PinEntryTextField> {
             _pin[i] = widget.lastPin[i];
           }
         }
-        textfields = generateTextFields(context);
+        textFields = generateTextFields(context);
       });
     });
   }
@@ -104,19 +112,24 @@ class PinEntryTextFieldState extends State<PinEntryTextField> {
         controller: _textControllers[i],
         keyboardType: TextInputType.number,
         textAlign: TextAlign.center,
+        cursorColor: widget.cursorColor,
         maxLength: 1,
         autofocus: autofocus,
         style: TextStyle(
             fontWeight: FontWeight.bold,
+            color: widget.textColor,
             // color: Colors.black,
             fontSize: widget.fontSize),
         focusNode: _focusNodes[i],
         obscureText: widget.isTextObscure,
         decoration: InputDecoration(
             counterText: "",
-            border: widget.showFieldAsBox
-                ? OutlineInputBorder(borderSide: BorderSide(width: 2.0))
-                : null),
+            enabledBorder:widget.showFieldAsBox
+                ? OutlineInputBorder(borderSide: BorderSide(width: 1.0,color: widget.boxColor))
+                : null ,
+            focusedBorder:widget.showFieldAsBox
+                ? OutlineInputBorder(borderSide: BorderSide(width: 2.0,color: widget.boxColor))
+                : null) ,
         onChanged: (String str) {
           setState(() {
             _pin[i] = str;
@@ -149,6 +162,6 @@ class PinEntryTextFieldState extends State<PinEntryTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return textfields;
+    return textFields;
   }
 }
